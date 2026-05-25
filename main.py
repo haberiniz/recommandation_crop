@@ -3,6 +3,10 @@
 🌾 نظام التوصيات الزراعية الجزائري
 FastAPI Backend for AgriPAI - Deploy on Render
 """
+import sys
+if sys.version_info < (3, 11) or sys.version_info >= (3, 12):
+    print(f"⚠️ تحذير: هذا التطبيق مصمم لـ Python 3.11.x، أنت تستخدم {sys.version}")
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -13,9 +17,7 @@ from datetime import datetime
 from utils.data import WILAYAS, CROPS, MONTHS_AR, FAMILIES
 from utils.time_utils import resolve_year, timing_status, is_plantable_window
 
-import sys
-if sys.version_info < (3, 11):
-    print(f"⚠️  تحذير: هذا التطبيق مصمم لـ Python 3.11+، أنت تستخدم {sys.version}")
+
 def timing_penalty(plant_idx: int, req_month: int) -> int:
     """قم بتقدير عقوبة التوقيت بالأيام بين الشهر المثالي وشهر الزراعة المطلوب.
     تُرجع قيمة بين 0 و30 (أكبر اختلاف يعادل عقوبة 30 يوم).
