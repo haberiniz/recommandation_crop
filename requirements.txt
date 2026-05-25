@@ -1,9 +1,9 @@
-# requirements.txt - مُحدَّث لـ Render
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-pydantic==2.9.2
-pydantic-settings==2.6.1
+# requirements.txt - متوافق 100% مع Render
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+pydantic==2.7.4
+pydantic-settings==2.3.4
 requests==2.32.3
 python-multipart==0.0.9
-gunicorn==23.0.0
-httpx==0.27.2
+gunicorn==22.0.0
+httpx==0.27.0

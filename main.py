@@ -12,6 +12,19 @@ from datetime import datetime
 
 from utils.data import WILAYAS, CROPS, MONTHS_AR, FAMILIES
 from utils.time_utils import resolve_year, timing_status, is_plantable_window
+
+import sys
+if sys.version_info < (3, 11):
+    print(f"⚠️  تحذير: هذا التطبيق مصمم لـ Python 3.11+، أنت تستخدم {sys.version}")
+def timing_penalty(plant_idx: int, req_month: int) -> int:
+    """قم بتقدير عقوبة التوقيت بالأيام بين الشهر المثالي وشهر الزراعة المطلوب.
+    تُرجع قيمة بين 0 و30 (أكبر اختلاف يعادل عقوبة 30 يوم).
+    """
+    # حساب الفرق بالشهور بأخذ المسافة الدائرية الدنيا
+    diff = abs((req_month - plant_idx) % 12)
+    diff = min(diff, 12 - diff)
+    days = diff * 30
+    return min(days, 30)
 from utils.scoring import (
     rule_score, ml_score, hybrid_score, 
     check_rotation, build_explanation
