@@ -1,13 +1,16 @@
+# render.yaml
 services:
   - type: web
     name: agri-recommend-api
     env: python
-    region: frankfurt  # أقرب منطقة للجزائر
-    buildCommand: ""
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11.9"  # ← إصدار مستقر مع wheels جاهزة
+      - key: PIP_NO_CACHE_DIR
+        value: "1"       # ← توفير مساحة وتجنب مشاكل الكاش
       - key: FASTAPI_ENV
         value: production
     healthCheckPath: /health
